@@ -9,7 +9,12 @@ module.exports = {
     "plugin:react/jsx-runtime",
     "prettier",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs", "postcss.config.js", "tailwind.config.js"],
+  ignorePatterns: [
+    "dist",
+    ".eslintrc.cjs",
+    "postcss.config.js",
+    "tailwind.config.js",
+  ],
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],
   rules: {
