@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-stripe-45":
+        "gradient-stripe":
           "repeating-linear-gradient(70deg, #c90076,#c90076 10px, #e69138 10px, #e69138 20px)",
       },
     },
