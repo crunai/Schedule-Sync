@@ -29,7 +29,7 @@ export type Slot = {
 export type IntervalSlot = {
   start: DateTime;
   end: DateTime;
-  status: Paint | "None";
+  status: InterevalType;
 };
 
 export type InterevalType = "Preferred" | "Not Preferred" | "None";
