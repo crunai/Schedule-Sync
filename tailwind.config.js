@@ -2,7 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "gradient-stripe-45":
+          "repeating-linear-gradient(70deg, #c90076,#c90076 10px, #e69138 10px, #e69138 20px)",
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
