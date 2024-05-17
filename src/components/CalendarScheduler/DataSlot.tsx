@@ -19,15 +19,14 @@ function DataSlot({
   const [status, setStatus] = useState<InterevalType>("None");
   const isMouseDown = useMouseDown();
   const className = useMemo(() => {
-    let className = "";
-    if (status === "Preferred") className = twJoin("bg-green-400", className);
-    if (status === "Not Preferred")
-      className += twJoin("bg-yellow-300", className);
-    if (status === "None") className += twJoin("bg-red-200", className);
+    let clName = "";
+    if (status === "Preferred") clName = twJoin("bg-green-400", clName);
+    if (status === "Not Preferred") clName += twJoin("bg-yellow-300", clName);
+    if (status === "None") clName += twJoin("bg-red-200", clName);
     if (position.index !== position.last) {
-      className = twJoin("border-b-0", className);
+      clName = twJoin("border-b-0", clName);
     }
-    return className;
+    return clName;
   }, [status, position]);
 
   const setPaint = (requireMouseDown: boolean = true) => {
