@@ -1,8 +1,10 @@
+import CalendarScheduler from "./components/CalendarScheduler/CalendarScheduler";
+
 function App() {
   return (
-    <>
-      <h1>Vite + React</h1>
-    </>
+    <main>
+      <CalendarScheduler />
+    </main>
   );
 }
 
