@@ -55,7 +55,7 @@ function PaintSelector({
             )}
             onClick={() => setPaint(value)}
           >
-            <div className="opacity-100">{value}</div>
+            <div>{value}</div>
             {isSelected && <FaPaintBrush size={"0.8rem"} />}
           </div>
         );

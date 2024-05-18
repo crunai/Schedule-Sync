@@ -5,11 +5,6 @@ import { OptionT } from "../CalendarScheduler/CalendarScheduler";
 const allTz = Intl.supportedValuesOf("timeZone");
 const defaultTZ = DateTime.local().zoneName;
 
-export type IntervalSlot = {
-  start: Date;
-  end: Date;
-};
-
 function TimezoneSelector({
   setOption,
 }: {
