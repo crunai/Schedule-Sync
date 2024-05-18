@@ -5,7 +5,7 @@ import PaddingBlock from "./PaddingBlock";
 import IncrementalPaddingBlocks from "./IncrementalPaddingBlocks";
 import DataSlot from "./DataSlot";
 
-function CalendarLabels({
+function CalendarTimeSlots({
   timeSlots,
   option,
 }: {
@@ -93,4 +93,4 @@ function addSlots(
   });
 }
 
-export default CalendarLabels;
+export default CalendarTimeSlots;
