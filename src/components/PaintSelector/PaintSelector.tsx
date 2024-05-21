@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { OptionT } from "../CalendarScheduler/CalendarScheduler";
 import { twJoin } from "tailwind-merge";
 import { FaPaintBrush } from "react-icons/fa";
 
@@ -24,16 +23,14 @@ const paintValues: { bg: string; hover: string; value: Paint }[] = [
 ];
 
 function PaintSelector({
-  setOption,
+  setParentPaint,
 }: {
-  setOption: React.Dispatch<React.SetStateAction<OptionT>>;
+  setParentPaint: (value: Paint) => void;
 }) {
   const [paint, setPaint] = useState<Paint>("Preferred");
   useEffect(() => {
-    setOption((prev) => {
-      return { ...prev, paint };
-    });
-  }, [paint, setOption]);
+    setParentPaint(paint);
+  }, [paint, setParentPaint]);
 
   return (
     <div className="mr-0 mt-5 flex w-fit justify-start rounded-box">
