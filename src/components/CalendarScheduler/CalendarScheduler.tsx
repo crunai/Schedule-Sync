@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import TimezoneSelector from "../TimezoneSelector/TimezoneSelector";
 import PaintSelector, { Paint } from "../PaintSelector/PaintSelector";
 import GapSlider from "../GapSlider/GapSlider";
@@ -48,6 +48,30 @@ function CalendarScheduler() {
     gapSize: 30,
   });
 
+  const handleTzChange = useCallback(
+    (value: string) =>
+      setOption((prev) => {
+        return { ...prev, tz: value };
+      }),
+    [],
+  );
+
+  const handleGapChange = useCallback(
+    (value: number) =>
+      setOption((prev) => {
+        return { ...prev, gapSize: value };
+      }),
+    [],
+  );
+
+  const handlePaintChange = useCallback(
+    (value: Paint) =>
+      setOption((prev) => {
+        return { ...prev, paint: value };
+      }),
+    [],
+  );
+
   const gappedAvailableTimeSlots = useMemo(() => {
     const uniqueDays = extractUniqueDays(availableTimeSlots);
     const availabilitiesAsOffsets = availableTimeSlots.map((time) => {
@@ -91,10 +115,10 @@ function CalendarScheduler() {
   return (
     <div className="h-full w-full">
       <div>
-        <TimezoneSelector setOption={setOption} />
+        <TimezoneSelector setParentTz={handleTzChange} />
       </div>
       <div className="w-96">
-        <GapSlider setOption={setOption} />
+        <GapSlider setParentGap={handleGapChange} />
       </div>
       {gappedAvailableTimeSlots[0] ? (
         <section className="flex gap-4">
@@ -114,7 +138,7 @@ function CalendarScheduler() {
         <div>No Time Slots</div>
       )}
       {timeSlots.map(() => null)}
-      <PaintSelector setOption={setOption} />
+      <PaintSelector setParentPaint={handlePaintChange} />
     </div>
   );
 }
