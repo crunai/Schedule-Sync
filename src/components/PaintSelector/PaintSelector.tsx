@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { OptionT } from "../CalendarScheduler/CalendarScheduler";
 import { twJoin } from "tailwind-merge";
 import { FaPaintBrush } from "react-icons/fa";
 
@@ -24,19 +23,17 @@ const paintValues: { bg: string; hover: string; value: Paint }[] = [
 ];
 
 function PaintSelector({
-  setOption,
+  setParentPaint,
 }: {
-  setOption: React.Dispatch<React.SetStateAction<OptionT>>;
+  setParentPaint: (value: Paint) => void;
 }) {
   const [paint, setPaint] = useState<Paint>("Preferred");
   useEffect(() => {
-    setOption((prev) => {
-      return { ...prev, paint };
-    });
-  }, [paint, setOption]);
+    setParentPaint(paint);
+  }, [paint, setParentPaint]);
 
   return (
-    <div className="mt-5 flex justify-start">
+    <div className="mr-0 mt-5 flex w-fit justify-start rounded-box">
       {paintValues.map(({ bg, hover, value }) => {
         const isSelected = value === paint;
         const optionClass = twJoin(
@@ -46,17 +43,22 @@ function PaintSelector({
           hover,
         );
         return (
-          <div
-            key={value}
-            role="option"
-            className={twJoin(
-              "btn btn-square btn-lg flex flex-col justify-center py-1 text-xs",
-              optionClass,
+          <div key={value} className="indicator mb-2">
+            <div
+              role="option"
+              className={twJoin(
+                "btn btn-square btn-lg flex flex-col justify-center py-1 text-xs",
+                optionClass,
+              )}
+              onClick={() => setPaint(value)}
+            >
+              <div>{value}</div>
+            </div>
+            {isSelected && (
+              <div className="badge indicator-item badge-md indicator-center indicator-bottom border border-gray-400">
+                {<FaPaintBrush size={"1rem"} />}
+              </div>
             )}
-            onClick={() => setPaint(value)}
-          >
-            <div>{value}</div>
-            {isSelected && <FaPaintBrush size={"0.8rem"} />}
           </div>
         );
       })}

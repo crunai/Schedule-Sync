@@ -1,19 +1,16 @@
 import { useEffect, useState } from "react";
-import { OptionT } from "../CalendarScheduler/CalendarScheduler";
 import { BsZoomOut } from "react-icons/bs";
 import { BsZoomIn } from "react-icons/bs";
 
 function GapSlider({
-  setOption,
+  setParentGap,
 }: {
-  setOption: React.Dispatch<React.SetStateAction<OptionT>>;
+  setParentGap: (newTz: number) => void;
 }) {
   const [gapSize, setGapSize] = useState(1);
   useEffect(() => {
-    setOption((prev) => {
-      return { ...prev, gapSize: 15 * 2 ** gapSize };
-    });
-  }, [gapSize, setOption]);
+    setParentGap(15 * 2 ** gapSize);
+  }, [gapSize, setParentGap]);
 
   return (
     <div className="flex flex-row items-center justify-center">

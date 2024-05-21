@@ -1,26 +1,20 @@
 import { DateTime, Settings } from "luxon";
 import { useEffect, useState } from "react";
-import { OptionT } from "../CalendarScheduler/CalendarScheduler";
 
 const allTz = Intl.supportedValuesOf("timeZone");
 const defaultTZ = DateTime.local().zoneName;
 
 function TimezoneSelector({
-  setOption,
+  setParentTz,
 }: {
-  setOption: React.Dispatch<React.SetStateAction<OptionT>>;
+  setParentTz: (newTz: string) => void;
 }) {
   const [tz, setTz] = useState(defaultTZ);
 
   useEffect(() => {
     Settings.defaultZone = tz;
-    setOption((prev) => {
-      return {
-        ...prev,
-        tz,
-      };
-    });
-  }, [tz, setOption]);
+    setParentTz(tz);
+  }, [tz, setParentTz]);
 
   useEffect(() => {
     return () => {
@@ -30,10 +24,13 @@ function TimezoneSelector({
 
   return (
     <>
-      <label htmlFor="timezone">Timezone:</label>
+      <label htmlFor="timezone" className="label">
+        Timezone:
+      </label>
       <select
         name="timezone"
         id="timezone"
+        className="rounded border border-black"
         onChange={(e) => {
           setTz(e.target.value);
         }}
