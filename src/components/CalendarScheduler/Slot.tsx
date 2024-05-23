@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { twJoin } from "tailwind-merge";
+import { ClassNameValue, twJoin } from "tailwind-merge";
 
 function Slot({
   children,
@@ -8,7 +8,7 @@ function Slot({
 }: {
   children?: React.ReactNode;
   gapSize: number;
-  className?: string;
+  className?: ClassNameValue;
 }) {
   const height = useMemo(() => {
     if (gapSize === 30) {

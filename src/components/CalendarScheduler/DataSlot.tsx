@@ -9,12 +9,12 @@ function DataSlot({
   children,
   gapSize,
   paint,
-  position,
+  isLast,
 }: {
   children?: React.ReactNode;
   gapSize: number;
   paint: Paint;
-  position: { index: number; last: number };
+  isLast: boolean;
 }) {
   const [status, setStatus] = useState<InterevalType>("None");
   const isMouseDown = useMouseDown();
@@ -23,11 +23,9 @@ function DataSlot({
     if (status === "Preferred") clName = twJoin("bg-green-400", clName);
     if (status === "Not Preferred") clName += twJoin("bg-yellow-300", clName);
     if (status === "None") clName += twJoin("bg-red-200", clName);
-    if (position.index !== position.last) {
-      clName = twJoin("border-b-0", clName);
-    }
+    if (!isLast) clName = twJoin("border-b-0", clName);
     return clName;
-  }, [status, position]);
+  }, [status, isLast]);
 
   const setPaint = (requireMouseDown: boolean = true) => {
     if (isMouseDown || !requireMouseDown) {
@@ -41,7 +39,7 @@ function DataSlot({
     <div
       onMouseEnter={() => setPaint()}
       onMouseLeave={() => setPaint()}
-      onClick={() => setPaint(false)}
+      onMouseDown={() => setPaint(false)}
     >
       <Slot
         className={twJoin(

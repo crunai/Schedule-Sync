@@ -50,7 +50,7 @@ function PaintSelector({
                 "btn btn-square btn-lg flex flex-col justify-center py-1 text-xs",
                 optionClass,
               )}
-              onClick={() => setPaint(value)}
+              onMouseDown={() => setPaint(value)}
             >
               <div>{value}</div>
             </div>
