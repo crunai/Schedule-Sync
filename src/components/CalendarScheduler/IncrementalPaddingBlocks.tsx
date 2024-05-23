@@ -7,6 +7,7 @@ function IncrementalPaddingBlocks(
   to: DateTime,
   key: string,
   gapSize: number,
+  isLast?: boolean,
 ) {
   const padSlots = [];
   let padIterator = from;
@@ -14,7 +15,14 @@ function IncrementalPaddingBlocks(
     padSlots.push(padIterator);
     padIterator = padIterator.plus({ minutes: 15 });
   }
-  return <PaddingBlocks gapSize={gapSize} key={key} padSlots={padSlots} />;
+  return (
+    <PaddingBlocks
+      isLast={isLast}
+      gapSize={gapSize}
+      key={key}
+      padSlots={padSlots}
+    />
+  );
 }
 
 export default IncrementalPaddingBlocks;
