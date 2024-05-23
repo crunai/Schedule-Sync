@@ -55,6 +55,7 @@ function addSlots(
         lastTimeSlot,
         "dst-base-padding",
         option.gapSize,
+        true,
       );
     }
 
