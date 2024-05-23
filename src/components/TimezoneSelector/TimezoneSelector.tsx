@@ -6,8 +6,10 @@ const defaultTZ = DateTime.local().zoneName;
 
 function TimezoneSelector({
   setParentTz,
+  numWhiteSpace = 0,
 }: {
   setParentTz: (newTz: string) => void;
+  numWhiteSpace?: number;
 }) {
   const [tz, setTz] = useState(defaultTZ);
 
@@ -24,8 +26,8 @@ function TimezoneSelector({
 
   return (
     <>
-      <label htmlFor="timezone" className="label">
-        Timezone:
+      <label htmlFor="timezone" className="label whitespace-pre">
+        Timezone:{" ".repeat(numWhiteSpace)}
       </label>
       <select
         name="timezone"
