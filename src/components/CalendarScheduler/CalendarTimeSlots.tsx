@@ -67,7 +67,10 @@ function addSlots(
         <DataSlot
           gapSize={option.gapSize}
           paint={option.paint}
-          position={{ index, last: baselineSlots.length - 1 }}
+          isLast={isSameHourMinute(
+            baselineSlots[baselineSlots.length - 1],
+            slot,
+          )}
         >
           {slot.toLocaleString(DateTime.TIME_SIMPLE)}
         </DataSlot>
