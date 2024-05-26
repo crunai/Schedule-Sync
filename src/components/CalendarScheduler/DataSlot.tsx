@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import Slot from "./Slot";
 import { InterevalType } from "./CalendarScheduler";
 import { useMouseDown } from "../../hooks/useMouseDown";
-import { Paint } from "../PaintSelector/PaintSelector";
+import { Paint } from "../Inputs/PaintSelector/PaintSelector";
 import { twJoin } from "tailwind-merge";
 
 function DataSlot({
