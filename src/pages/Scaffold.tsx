@@ -6,7 +6,7 @@ import Fallback from "./Fallback";
 function Scaffold() {
   return (
     <div className="flex min-h-screen flex-col">
-      <nav className="navbar justify-between">
+      <nav className="navbar mt-2 justify-between">
         <Link to="/">
           <button className="btn btn-ghost text-4xl text-emerald-500 hover:bg-inherit">
             <GiBowenKnot className="mr-1" />
@@ -14,7 +14,7 @@ function Scaffold() {
           </button>
         </Link>
         <Link to="/create">
-          <button className="btn btn-ghost text-xl text-emerald-600 hover:bg-inherit">
+          <button className="btn btn-ghost mr-3 bg-emerald-600 text-xl text-white hover:bg-emerald-700">
             Create
           </button>
         </Link>
