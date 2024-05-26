@@ -49,8 +49,8 @@ export const TypewriterEffectSmooth = ({
     <div className="my-6 flex space-x-1">
       <motion.div className="overflow-hidden pb-2" {...ScrollTypeOptions}>
         <div className="whitespace-nowrap text-2xl font-bold sm:text-4xl xl:text-5xl">
-          {renderWords()}{" "}
-        </div>{" "}
+          {renderWords()}
+        </div>
       </motion.div>
       <BlinkingCursor />
     </div>
