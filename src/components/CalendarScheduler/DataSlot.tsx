@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import Slot from "./Slot";
 import { InterevalType } from "./CalendarScheduler";
 import { useMouseDown } from "../../hooks/useMouseDown";
-import { Paint } from "../PaintSelector/PaintSelector";
+import { Paint } from "../Inputs/PaintSelector/PaintSelector";
 import { twJoin } from "tailwind-merge";
 
 function DataSlot({
@@ -40,6 +40,15 @@ function DataSlot({
       onMouseEnter={() => setPaint()}
       onMouseLeave={() => setPaint()}
       onMouseDown={() => setPaint(false)}
+      onClick={() => setPaint(false)}
+      tabIndex={0}
+      role="button"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setPaint(false);
+        }
+      }}
     >
       <Slot
         className={twJoin(

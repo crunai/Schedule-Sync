@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import TimezoneSelector from "../TimezoneSelector/TimezoneSelector";
-import PaintSelector, { Paint } from "../PaintSelector/PaintSelector";
-import GapSlider from "../GapSlider/GapSlider";
+import { useEffect, useMemo, useState } from "react";
+import TimezoneSelector from "../Inputs/TimezoneSelector/TimezoneSelector";
+import PaintSelector, { Paint } from "../Inputs/PaintSelector/PaintSelector";
+import GapSlider from "../Inputs/GapSlider/GapSlider";
 import CalendarLabels from "./CalendarLabels";
 import CalendarTimeSlots from "./CalendarTimeSlots";
 import Slot from "./Slot";
@@ -12,6 +12,7 @@ import {
   findSlotValidStartTimes,
   setSlotZone,
 } from "../../helpers/DateTime";
+import useCalendarChanges from "../../hooks/useCalendarChanges";
 
 const defaultTZ = DateTime.local().zoneName;
 
@@ -48,29 +49,8 @@ function CalendarScheduler() {
     gapSize: 30,
   });
 
-  const handleTzChange = useCallback(
-    (value: string) =>
-      setOption((prev) => {
-        return { ...prev, tz: value };
-      }),
-    [],
-  );
-
-  const handleGapChange = useCallback(
-    (value: number) =>
-      setOption((prev) => {
-        return { ...prev, gapSize: value };
-      }),
-    [],
-  );
-
-  const handlePaintChange = useCallback(
-    (value: Paint) =>
-      setOption((prev) => {
-        return { ...prev, paint: value };
-      }),
-    [],
-  );
+  const { handleTzChange, handleGapChange, handlePaintChange } =
+    useCalendarChanges(setOption);
 
   const gappedAvailableTimeSlots = useMemo(() => {
     const uniqueDays = extractUniqueDays(availableTimeSlots);

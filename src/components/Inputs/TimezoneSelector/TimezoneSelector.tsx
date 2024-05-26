@@ -32,7 +32,7 @@ function TimezoneSelector({
       <select
         name="timezone"
         id="timezone"
-        className="rounded border border-black"
+        className="select w-full rounded border border-black"
         onChange={(e) => {
           setTz(e.target.value);
         }}

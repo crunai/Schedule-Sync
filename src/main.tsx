@@ -3,11 +3,16 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { MouseDownProvider } from "./Context/MouseContext.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <MouseDownProvider>
-      <App />
-    </MouseDownProvider>
+    <QueryClientProvider client={queryClient}>
+      <MouseDownProvider>
+        <App />
+      </MouseDownProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 );
