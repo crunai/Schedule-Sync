@@ -44,16 +44,17 @@ function PaintSelector({
         );
         return (
           <div key={value} className="indicator mb-2">
-            <div
+            <button
               role="option"
               className={twJoin(
                 "btn btn-square btn-lg flex flex-col justify-center py-1 text-xs",
                 optionClass,
               )}
               onMouseDown={() => setPaint(value)}
+              onClick={() => setPaint(value)}
             >
               <div>{value}</div>
-            </div>
+            </button>
             {isSelected && (
               <div className="badge indicator-item badge-md indicator-center indicator-bottom border border-gray-400">
                 {<FaPaintBrush size={"1rem"} />}

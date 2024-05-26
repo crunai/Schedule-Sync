@@ -40,6 +40,15 @@ function DataSlot({
       onMouseEnter={() => setPaint()}
       onMouseLeave={() => setPaint()}
       onMouseDown={() => setPaint(false)}
+      onClick={() => setPaint(false)}
+      tabIndex={0}
+      role="button"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setPaint(false);
+        }
+      }}
     >
       <Slot
         className={twJoin(
