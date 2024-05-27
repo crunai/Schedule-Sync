@@ -14,7 +14,7 @@ function Scaffold() {
           </button>
         </Link>
         <Link to="/create">
-          <button className="btn btn-ghost mr-3 bg-emerald-600 text-xl text-white hover:bg-emerald-700">
+          <button className="btn btn-ghost mr-3 text-xl text-emerald-700 underline underline-offset-2">
             Create
           </button>
         </Link>
