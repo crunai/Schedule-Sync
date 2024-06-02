@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Scaffold from "./pages/Scaffold";
 import { lazy } from "react";
 import Home from "./pages/Home";
+import { ErrorBoundary } from "react-error-boundary";
 
 const Create = lazy(() => import("./pages/Create"));
 const Schedule = lazy(() => import("./pages/Schedule"));
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/schedule/:scheduleId",
-        element: <Schedule />,
+        element:   <ErrorBoundary fallback={<NotFound isSchedule/>}><Schedule /></ErrorBoundary>,
       },
       {
         path: "*",
