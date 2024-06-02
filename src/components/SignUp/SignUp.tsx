@@ -88,7 +88,7 @@ function SignUp({
           <span className="label-text">Password (Optional)</span>
         </div>
         <input
-          type="text"
+          type="password"
           {...register("password")}
           className="input input-bordered w-full max-w-sm"
         />
