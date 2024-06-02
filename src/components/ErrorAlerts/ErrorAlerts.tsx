@@ -6,9 +6,7 @@ function ErrorAlerts({ errors }: { errors: FieldErrors<createFormT> }) {
   return (
     <>
       {Object.entries(errors).map(([field, error]) => {
-        return (
-          <ErrorAlert key={field} message={error.message}/>
-        );
+        return <ErrorAlert key={field} message={error.message} />;
       })}
     </>
   );

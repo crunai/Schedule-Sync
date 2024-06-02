@@ -88,7 +88,7 @@ function Create() {
           </button>
           <ErrorAlerts errors={errors} />
           {mutationSubmit.isError && (
-            <ErrorAlert message="Something went wrong during schedule creation"/>
+            <ErrorAlert message="Something went wrong during schedule creation" />
           )}
         </div>
       </form>
