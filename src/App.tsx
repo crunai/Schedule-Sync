@@ -23,7 +23,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/schedule/:scheduleId",
-        element:   <ErrorBoundary fallback={<NotFound isSchedule/>}><Schedule /></ErrorBoundary>,
+        element: (
+          <ErrorBoundary fallback={<NotFound isSchedule />}>
+            <Schedule />
+          </ErrorBoundary>
+        ),
       },
       {
         path: "*",
