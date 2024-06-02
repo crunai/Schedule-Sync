@@ -1,23 +1,27 @@
 import { DateTime } from "luxon";
-import { GappedAvailableTimeSlots, OptionT } from "./CalendarScheduler";
+import { GappedAvailableTimeSlots } from "./CalendarScheduler";
 import { isAfterHourMinute, isSameHourMinute } from "../../helpers/DateTime";
 import PaddingBlock from "./PaddingBlock";
 import IncrementalPaddingBlocks from "./IncrementalPaddingBlocks";
 import DataSlot from "./DataSlot";
+import { OptionT } from "../../pages/Schedule";
+import { Paint } from "../Inputs/PaintSelector/PaintSelector";
 
 function CalendarTimeSlots({
   timeSlots,
   option,
+  paint,
 }: {
   timeSlots: GappedAvailableTimeSlots;
   option: OptionT;
+  paint: Paint;
 }) {
   return (
     <>
       {timeSlots.map(({ day, slotsAtDay }) => (
         <div key={day.toMillis()} className="flex flex-col">
           <div>{day.toLocaleString()}</div>
-          {addSlots(slotsAtDay, timeSlots, option)}
+          {addSlots(slotsAtDay, timeSlots, option, paint)}
         </div>
       ))}
     </>
@@ -28,6 +32,7 @@ function addSlots(
   slotsAtDay: DateTime[],
   gappedAvailableTimeSlots: GappedAvailableTimeSlots,
   option: OptionT,
+  paint: Paint,
 ) {
   const baselineSlots = gappedAvailableTimeSlots[0].slotsAtDay;
   let hasPaddedDST = false;
@@ -67,7 +72,7 @@ function addSlots(
           )}
         <DataSlot
           gapSize={option.gapSize}
-          paint={option.paint}
+          paint={paint}
           isLast={isSameHourMinute(
             baselineSlots[baselineSlots.length - 1],
             slot,

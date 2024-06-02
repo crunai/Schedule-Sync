@@ -1,8 +1,6 @@
 import { DateTime } from "luxon";
 import { useEffect, useMemo, useState } from "react";
-import TimezoneSelector from "../Inputs/TimezoneSelector/TimezoneSelector";
 import PaintSelector, { Paint } from "../Inputs/PaintSelector/PaintSelector";
-import GapSlider from "../Inputs/GapSlider/GapSlider";
 import CalendarLabels from "./CalendarLabels";
 import CalendarTimeSlots from "./CalendarTimeSlots";
 import Slot from "./Slot";
@@ -12,15 +10,7 @@ import {
   findSlotValidStartTimes,
   setSlotZone,
 } from "../../helpers/DateTime";
-import useCalendarChanges from "../../hooks/useCalendarChanges";
-
-const defaultTZ = DateTime.local().zoneName;
-
-export type OptionT = {
-  tz: string;
-  paint: Paint;
-  gapSize: number;
-};
+import { OptionT } from "../../pages/Schedule";
 
 export type Slot = {
   start: DateTime;
@@ -40,17 +30,10 @@ export type GappedAvailableTimeSlots = {
   slotsAtDay: DateTime[];
 }[];
 
-function CalendarScheduler() {
+function CalendarScheduler({ option }: { option: OptionT }) {
   const [timeSlots, setTimeSlots] = useState<IntervalSlot[]>([]);
   const [availableTimeSlots, setAvailableTimeSlots] = useState<Slot[]>([]);
-  const [option, setOption] = useState<OptionT>({
-    tz: defaultTZ,
-    paint: "Preferred",
-    gapSize: 30,
-  });
-
-  const { handleTzChange, handleGapChange, handlePaintChange } =
-    useCalendarChanges(setOption);
+  const [paint, setPaint] = useState<Paint>("Preferred");
 
   const gappedAvailableTimeSlots = useMemo(() => {
     const uniqueDays = extractUniqueDays(availableTimeSlots);
@@ -94,12 +77,6 @@ function CalendarScheduler() {
 
   return (
     <div className="h-full w-full">
-      <div>
-        <TimezoneSelector setParentTz={handleTzChange} />
-      </div>
-      <div className="w-96">
-        <GapSlider setParentGap={handleGapChange} />
-      </div>
       {gappedAvailableTimeSlots[0] ? (
         <section className="flex gap-4">
           <div className="flex flex-col">
@@ -112,13 +89,14 @@ function CalendarScheduler() {
           <CalendarTimeSlots
             timeSlots={gappedAvailableTimeSlots}
             option={option}
+            paint={paint}
           />
         </section>
       ) : (
         <div>No Time Slots</div>
       )}
       {timeSlots.map(() => null)}
-      <PaintSelector setParentPaint={handlePaintChange} />
+      <PaintSelector setParentPaint={(value: Paint) => setPaint(value)} />
     </div>
   );
 }

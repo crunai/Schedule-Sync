@@ -1,6 +1,5 @@
 import { useCallback } from "react";
-import { OptionT } from "../components/CalendarScheduler/CalendarScheduler";
-import { Paint } from "../components/Inputs/PaintSelector/PaintSelector";
+import { OptionT } from "../pages/Schedule";
 
 const useCalendarChanges = (
   setOption: React.Dispatch<React.SetStateAction<OptionT>>,
@@ -21,15 +20,7 @@ const useCalendarChanges = (
     [setOption],
   );
 
-  const handlePaintChange = useCallback(
-    (value: Paint) =>
-      setOption((prev) => {
-        return { ...prev, paint: value };
-      }),
-    [setOption],
-  );
-
-  return { handleTzChange, handleGapChange, handlePaintChange };
+  return { handleTzChange, handleGapChange };
 };
 
 export default useCalendarChanges;

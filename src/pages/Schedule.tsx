@@ -6,6 +6,15 @@ import { apiLink } from "../helpers/api.config";
 import { ScheduleInfo } from "../helpers/apiTypeAdapter";
 import SignUp from "../components/SignUp/SignUp";
 import { useState } from "react";
+import { DateTime } from "luxon";
+import OptionSelector from "../components/OptionSelector/OptionSelector";
+
+export type OptionT = {
+  gapSize: number;
+  tz: string;
+};
+
+const defaultTZ = DateTime.local().zoneName;
 
 function Schedule() {
   const scheduleId = useParams().scheduleId;
@@ -27,6 +36,10 @@ function Schedule() {
     throw Error;
   }
 
+  const [option, setOption] = useState<OptionT>({
+    gapSize: 30,
+    tz: defaultTZ,
+  });
   const [token, setToken] = useState("");
 
   return (
@@ -34,17 +47,18 @@ function Schedule() {
       <h1 className="mb-7 break-words text-center text-3xl font-semibold sm:text-5xl">
         {scheduleQuery.data?.schedule_name}
       </h1>
-      <div className="flex flex-row">
-        <div className="w-5/12">
+      <OptionSelector setOption={setOption}/>
+      <div className="flex flex-col sm:flex-row">
+        <div className="mx-3 sm:w-5/12">
           {token.length > 0 ? (
             <>Logged In</>
           ) : (
             <SignUp scheduleUUID={scheduleId} setToken={setToken} />
           )}
         </div>
-        <div className="w-7/12">Schedule</div>
+        <div className="sm:w-7/12 mx-3">Schedule</div>
       </div>
-      <CalendarScheduler />
+      <CalendarScheduler option={option} />
     </main>
   );
 }
