@@ -7,7 +7,7 @@ function GapSlider({
 }: {
   setParentGap: (newTz: number) => void;
 }) {
-  const [gapSize, setGapSize] = useState(1);
+  const [gapSize, setGapSize] = useState(2);
   useEffect(() => {
     setParentGap(15 * 2 ** gapSize);
   }, [gapSize, setParentGap]);
