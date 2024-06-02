@@ -25,7 +25,7 @@ function DayInWeekSelector({
             key={dayString}
             type="button"
             className={twMerge(
-              "join-item h-16 w-10 flex-1 border text-sm hover:scale-[1.01] sm:h-16 sm:w-16 sm:text-base",
+              "join-item h-16 w-10 flex-1 border text-sm sm:h-16 sm:w-16 sm:text-base",
               days.includes(dayNumber) && "bg-emerald-200",
               isError ? "border-red-600" : "border-black",
             )}
