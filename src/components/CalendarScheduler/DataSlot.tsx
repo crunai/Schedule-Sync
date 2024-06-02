@@ -53,7 +53,7 @@ function DataSlot({
       <Slot
         className={twJoin(
           className,
-          "select-none border border-black border-opacity-70 hover:cursor-crosshair",
+          "cursor-crosshair select-none border border-black border-opacity-70",
         )}
         gapSize={gapSize}
       >

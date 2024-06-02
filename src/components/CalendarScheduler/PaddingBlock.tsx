@@ -12,7 +12,7 @@ function PaddingBlock({
     <Slot
       gapSize={gapSize}
       className={twMerge(
-        "border border-black bg-gradient-stripe hover:cursor-not-allowed",
+        "cursor-not-allowed border border-black bg-gradient-stripe",
         className,
       )}
     ></Slot>
