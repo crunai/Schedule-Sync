@@ -1,4 +1,3 @@
-import { DateTime, Settings } from "luxon";
 import TimezoneSelector from "../components/Inputs/TimezoneSelector/TimezoneSelector";
 import HourSelector from "../components/Inputs/HourSelector/HourSelector";
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,8 +6,7 @@ import ErrorAlerts from "../components/ErrorAlerts/ErrorAlerts";
 import ScheduleNameInput from "../components/Inputs/ScheduleNameInput/ScheduleNameInput";
 import ScheduleTypePicker from "../components/Inputs/ScheduleTypePicker/ScheduleTypePicker";
 import useCreateForm from "../hooks/useCreateForm";
-
-Settings.defaultLocale = DateTime.local().locale;
+import ErrorAlert from "../components/ErrorAlerts/ErrorAlert";
 
 function Create() {
   const {
@@ -89,7 +87,9 @@ function Create() {
             )}
           </button>
           <ErrorAlerts errors={errors} />
-          {mutationSubmit.isError && <div>Something went wrong</div>}
+          {mutationSubmit.isError && (
+            <ErrorAlert message="Something went wrong during schedule creation"/>
+          )}
         </div>
       </form>
     </main>
