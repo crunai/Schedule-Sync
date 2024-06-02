@@ -14,7 +14,7 @@ function GapSlider({
 
   return (
     <div className="flex flex-row items-center justify-center">
-      <BsZoomOut className="h-8 w-8" />
+      <BsZoomIn className="h-8 w-8" />
       <input
         type="range"
         min={0}
@@ -24,7 +24,7 @@ function GapSlider({
         step={1}
         onChange={(e) => setGapSize(Number(e.target.value))}
       />
-      <BsZoomIn className="h-8 w-8" />
+      <BsZoomOut className="h-8 w-8" />
     </div>
   );
 }
