@@ -4,6 +4,6 @@ export type ScheduleInfo = {
   allowable_time_range: { start: number; end: number }[];
   timezone: string;
   user_availabilities: {
-    [key: string]: { start: number; end: number; preference: number };
+    [key: string]: { start: number; end: number; preference: number }[];
   };
 };
