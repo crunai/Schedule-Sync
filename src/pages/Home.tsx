@@ -6,7 +6,7 @@ const words = "Plan events with".split(" ").map((w) => {
 });
 const highlightedWord = {
   text: "Sync.",
-  className: "text-emerald-500 dark:text-emerald-500",
+  className: "text-emerald-500",
 };
 const renderedWords = words.concat(highlightedWord);
 
@@ -17,13 +17,11 @@ export default function Home() {
         The Solution for Group Scheduling
       </p>
       <TypewriterEffectSmooth words={renderedWords} />
-      <div className="flex flex-col space-x-0 space-y-4 md:flex-row md:space-x-4 md:space-y-0">
-        <Link to="/create">
-          <button className="btn btn-md border bg-emerald-600 text-white sm:btn-lg hover:bg-emerald-700">
-            Create a New Schedule
-          </button>
-        </Link>
-      </div>
+      <Link to="/create">
+        <button className="btn btn-md border bg-emerald-600 text-white sm:btn-lg hover:bg-emerald-700">
+          Create a New Schedule
+        </button>
+      </Link>
     </div>
   );
 }
