@@ -1,11 +1,11 @@
 import { DateTime } from "luxon";
 import { GappedAvailableTimeSlots } from "./CalendarScheduler";
 import { isAfterHourMinute, isSameHourMinute } from "../../helpers/DateTime";
-import PaddingBlock from "./PaddingBlock";
 import IncrementalPaddingBlocks from "./IncrementalPaddingBlocks";
 import DataSlot from "./DataSlot";
 import { OptionT } from "../../pages/Schedule";
 import { Paint } from "../Inputs/PaintSelector/PaintSelector";
+import EmptySlot from "./EmptySlot";
 
 function CalendarTimeSlots({
   timeSlots,
@@ -67,9 +67,10 @@ function addSlots(
     const renderedSlot = (
       <div key={slot.toMillis()}>
         {index !== 0 &&
-          slot.diff(slotsAtDay[index - 1], "minute").minutes !== 15 && (
-            <PaddingBlock gapSize={option.gapSize} />
-          )}
+          !isSameHourMinute(
+            slot,
+            slotsAtDay[index - 1].plus({ minutes: 15 }),
+          ) && <EmptySlot isLabel={false} gapSize={option.gapSize} />}
         <DataSlot
           gapSize={option.gapSize}
           paint={paint}

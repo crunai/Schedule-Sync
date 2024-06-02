@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import Slot from "./Slot";
+import EmptySlot from "./EmptySlot";
 
 function CalendarLabels({
   header,
@@ -15,7 +16,7 @@ function CalendarLabels({
           <div key={slot.toMillis()}>
             {index !== 0 &&
               header[index - 1].plus({ minutes: 15 }).toMillis() !==
-                slot.toMillis() && <Slot gapSize={gapSize} />}
+                slot.toMillis() && <EmptySlot isLabel gapSize={gapSize} />}
             {index % (gapSize / 15) === 0 ? (
               <Slot gapSize={gapSize}>
                 {slot.toLocaleString(DateTime.TIME_SIMPLE)}
