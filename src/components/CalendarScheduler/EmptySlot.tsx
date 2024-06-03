@@ -22,7 +22,7 @@ function EmptySlot({
   }
   return (
     <PaddingBlocks
-      padSlots={Array.from({ length: size }).map(() => DateTime.fromMillis(0))}
+      padSlots={Array.from({ length: size }).map((_, i) => DateTime.fromMillis(i))}
       gapSize={gapSize}
     />
   );
