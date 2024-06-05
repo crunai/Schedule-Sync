@@ -23,7 +23,7 @@ function CopyLink() {
       data-tip="Copied"
     >
       <button
-        className="btn bg-amber-400 hover:bg-amber-400"
+        className="btn bg-amber-400 hover:bg-amber-400 ml-4"
         onClick={() => {
           void navigator.clipboard
             .writeText(`${deployLink}${pathname}`)
