@@ -1,7 +1,12 @@
 import { DateTime, WeekdayNumbers } from "luxon";
 import { useEffect, useMemo, useState } from "react";
 import { ScheduleInfo } from "../helpers/apiTypeAdapter";
-import { expandSingleDaySlotsToUniqueDays, extractUniqueDays, findSlotValidStartTimes, setSlotZone } from "../helpers/DateTime";
+import {
+  expandSingleDaySlotsToUniqueDays,
+  extractUniqueDays,
+  findSlotValidStartTimes,
+  setSlotZone,
+} from "../helpers/DateTime";
 
 export type Slot = {
   start: DateTime;
@@ -54,7 +59,6 @@ const useScheduleData = (data: ScheduleInfo, tz: string) => {
       };
     });
   });
-
 
   useEffect(() => {
     setAvailableTimeSlots((prev) =>

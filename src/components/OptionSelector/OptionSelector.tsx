@@ -2,6 +2,7 @@ import TimezoneSelector from "../Inputs/TimezoneSelector/TimezoneSelector";
 import GapSlider from "../Inputs/GapSlider/GapSlider";
 import useCalendarChanges from "../../hooks/useCalendarChanges";
 import { OptionT } from "../../pages/Schedule";
+import CopyLink from "../CopyLink/CopyLink";
 
 function OptionSelector({
   setOption,
@@ -15,7 +16,10 @@ function OptionSelector({
       <div className="flex flex-row">
         <TimezoneSelector numWhiteSpace={1} setParentTz={handleTzChange} />
       </div>
-      <GapSlider setParentGap={handleGapChange} />
+      <div className="flex flex-row gap-x-3">
+        <GapSlider setParentGap={handleGapChange} />
+        <CopyLink />
+      </div>
     </div>
   );
 }
