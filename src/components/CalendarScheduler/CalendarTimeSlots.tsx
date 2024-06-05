@@ -1,26 +1,34 @@
 import { DateTime } from "luxon";
-import { GappedAvailableTimeSlots } from "./CalendarScheduler";
-import { isAfterHourMinute, isSameHourMinute } from "../../helpers/DateTime";
+import {
+  allDays,
+  isAfterHourMinute,
+  isSameHourMinute,
+} from "../../helpers/DateTime";
 import IncrementalPaddingBlocks from "./IncrementalPaddingBlocks";
 import DataSlot from "./DataSlot";
 import { OptionT } from "../../pages/Schedule";
 import { Paint } from "../Inputs/PaintSelector/PaintSelector";
 import EmptySlot from "./EmptySlot";
+import { GappedAvailableTimeSlots } from "../../hooks/useScheduleData";
 
 function CalendarTimeSlots({
   timeSlots,
   option,
   paint,
+  isDaysInWeek,
 }: {
   timeSlots: GappedAvailableTimeSlots;
   option: OptionT;
   paint: Paint;
+  isDaysInWeek: boolean;
 }) {
   return (
     <>
       {timeSlots.map(({ day, slotsAtDay }) => (
-        <div key={day.toMillis()} className="flex flex-col">
-          <div>{day.toLocaleString()}</div>
+        <div key={day.toMillis()} className="flex flex-col items-center">
+          <div className="text-sm font-semibold">
+            {isDaysInWeek ? allDays[day.weekday - 1] : day.toLocaleString()}
+          </div>
           {addSlots(slotsAtDay, timeSlots, option, paint)}
         </div>
       ))}
@@ -78,9 +86,7 @@ function addSlots(
             baselineSlots[baselineSlots.length - 1],
             slot,
           )}
-        >
-          {slot.toLocaleString(DateTime.TIME_SIMPLE)}
-        </DataSlot>
+        ></DataSlot>
         {basePadding}
       </div>
     );
