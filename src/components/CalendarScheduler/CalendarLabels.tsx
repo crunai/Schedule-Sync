@@ -18,7 +18,11 @@ function CalendarLabels({
               header[index - 1].plus({ minutes: 15 }).toMillis() !==
                 slot.toMillis() && <EmptySlot isLabel gapSize={gapSize} />}
             {index % (gapSize / 15) === 0 ? (
-              <Slot className="whitespace-pre" gapSize={gapSize}>{slot.toFormat("h").length === 1 ? ` ${slot.toFormat("h:mma")}` : slot.toFormat("hh:mma")}</Slot>
+              <Slot className="whitespace-pre" gapSize={gapSize}>
+                {slot.toFormat("h").length === 1
+                  ? ` ${slot.toFormat("h:mma")}`
+                  : slot.toFormat("hh:mma")}
+              </Slot>
             ) : (
               <Slot gapSize={gapSize} />
             )}

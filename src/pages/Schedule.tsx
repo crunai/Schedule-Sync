@@ -47,7 +47,7 @@ function Schedule() {
       <h1 className="mb-7 break-words text-center text-3xl font-semibold sm:text-5xl">
         {scheduleQuery.data?.schedule_name}
       </h1>
-      <OptionSelector setOption={setOption}/>
+      <OptionSelector setOption={setOption} />
       <div className="flex flex-col sm:flex-row">
         <div className="mx-3 sm:w-5/12">
           {token.length > 0 ? (
@@ -56,7 +56,7 @@ function Schedule() {
             <SignUp scheduleUUID={scheduleId} setToken={setToken} />
           )}
         </div>
-        <div className="sm:w-7/12 mx-3">Schedule</div>
+        <div className="mx-3 sm:w-7/12">Schedule</div>
       </div>
       <CalendarScheduler option={option} />
     </main>
