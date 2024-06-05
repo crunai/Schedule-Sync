@@ -37,7 +37,7 @@ function Schedule() {
   }
 
   const [option, setOption] = useState<OptionT>({
-    gapSize: 30,
+    gapSize: 60,
     tz: defaultTZ,
   });
   const [token, setToken] = useState("");
