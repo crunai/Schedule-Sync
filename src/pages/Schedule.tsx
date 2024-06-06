@@ -6,6 +6,15 @@ import { apiLink } from "../helpers/api.config";
 import { ScheduleInfo } from "../helpers/apiTypeAdapter";
 import SignUp from "../components/SignUp/SignUp";
 import { useState } from "react";
+import { DateTime } from "luxon";
+import OptionSelector from "../components/OptionSelector/OptionSelector";
+
+export type OptionT = {
+  gapSize: number;
+  tz: string;
+};
+
+const defaultTZ = DateTime.local().zoneName;
 
 function Schedule() {
   const scheduleId = useParams().scheduleId;
@@ -27,24 +36,33 @@ function Schedule() {
     throw Error;
   }
 
+  const [option, setOption] = useState<OptionT>({
+    gapSize: 60,
+    tz: defaultTZ,
+  });
   const [token, setToken] = useState("");
 
   return (
     <main>
       <h1 className="mb-7 break-words text-center text-3xl font-semibold sm:text-5xl">
-        {scheduleQuery.data?.schedule_name}
+        {scheduleQuery.data.schedule_name}
       </h1>
-      <div className="flex flex-row">
-        <div className="w-5/12">
-          {token.length > 0 ? (
-            <>Logged In</>
-          ) : (
+      <OptionSelector setOption={setOption} />
+      <div className="flex flex-col sm:flex-row">
+        <div className="mx-4 sm:w-[45%]">
+          {token.length === 0 ? (
             <SignUp scheduleUUID={scheduleId} setToken={setToken} />
+          ) : (
+            <div>
+              <h2 className="text-3xl font-semibold">Individual Schedule</h2>
+            </div>
           )}
         </div>
-        <div className="w-7/12">Schedule</div>
+        <div className="mx-4 overflow-y-hidden overflow-x-scroll sm:m-0 sm:w-1/2 sm:pb-8">
+          <h2 className="mb-2 text-3xl font-semibold">Group Schedule</h2>
+          <CalendarScheduler option={option} data={scheduleQuery.data} />
+        </div>
       </div>
-      <CalendarScheduler />
     </main>
   );
 }

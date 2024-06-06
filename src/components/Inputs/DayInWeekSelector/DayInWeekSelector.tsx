@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
-
-const allDays: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+import { allDays } from "../../../helpers/DateTime";
 
 function DayInWeekSelector({
   setParentDaysInWeek,

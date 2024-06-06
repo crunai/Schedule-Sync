@@ -1,5 +1,5 @@
 import { DateTime, Interval } from "luxon";
-import { Slot } from "../components/CalendarScheduler/CalendarScheduler";
+import { Slot } from "../hooks/useScheduleData";
 
 export const isSameHourMinute = (a: DateTime, b: DateTime) => {
   return a.hour === b.hour && a.minute === b.minute;
@@ -27,12 +27,27 @@ export const setSlotZone = (
 };
 
 export const extractUniqueDays = (availableTimeSlots: Slot[]) => {
+  const expandedSlots = [];
+  for (const slot of availableTimeSlots) {
+    let slotIterator = slot.start;
+    while (
+      slotIterator.startOf("day").toMillis() !==
+      slot.end.startOf("day").toMillis()
+    ) {
+      expandedSlots.push({
+        start: slotIterator,
+        end: slotIterator.endOf("day"),
+      });
+      slotIterator = slotIterator.plus({ day: 1 });
+    }
+    expandedSlots.push({ start: slotIterator, end: slot.end });
+  }
   return Array.from(
     new Set(
-      availableTimeSlots
+      expandedSlots
         .map((slot) => slot.start.startOf("day").toMillis())
         .concat(
-          availableTimeSlots.map((slot) => slot.end.startOf("day").toMillis()),
+          expandedSlots.map((slot) => slot.end.startOf("day").toMillis()),
         ),
     ),
   ).map((t) => DateTime.fromMillis(t));
@@ -89,9 +104,15 @@ export const findSlotValidStartTimes = (
 export const expandSingleDaySlotsToUniqueDays = (
   uniqueDays: DateTime[],
   sortedSlotsAvailableToRenderStart: number[],
+  isDaysInWeek: boolean,
 ) => {
   const res = [];
-  for (const day of uniqueDays.sort((a, b) => a.toMillis() - b.toMillis())) {
+  let days = uniqueDays.sort((a, b) => a.toMillis() - b.toMillis());
+  if (isDaysInWeek) {
+    days = uniqueDays.sort((a, b) => a.weekday - b.weekday);
+  }
+
+  for (const day of days) {
     const slotsAtDay: DateTime[] = [];
     for (const slot of sortedSlotsAvailableToRenderStart) {
       slotsAtDay.push(DateTime.fromMillis(slot + day.toMillis()));
@@ -103,3 +124,13 @@ export const expandSingleDaySlotsToUniqueDays = (
   }
   return res;
 };
+
+export const allDays: string[] = [
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+  "Sat",
+  "Sun",
+];

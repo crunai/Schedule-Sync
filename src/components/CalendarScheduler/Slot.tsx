@@ -25,7 +25,7 @@ function Slot({
   return (
     <div
       className={twJoin(
-        "flex items-center justify-center text-center",
+        "flex min-w-16 items-center justify-center text-center",
         height,
         className,
       )}

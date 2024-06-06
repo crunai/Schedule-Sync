@@ -89,6 +89,7 @@ function SignUp({
         </div>
         <input
           type="password"
+          autoComplete="password"
           {...register("password")}
           className="input input-bordered w-full max-w-sm"
         />
