@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.38.0",
-    "axios": "^1.7.4",
+    "axios": "^1.8.2",
     "daisyui": "^4.11.1",
     "framer-motion": "^11.2.6",
     "luxon": "^3.4.4",
